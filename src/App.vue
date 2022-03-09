@@ -1,8 +1,10 @@
-<template>
-    <the-header title="Vue Resources"></the-header>
-    <div class="container">
-        <the-resources></the-resources>
-    </div>
+<template>  
+    <span>
+        <the-header title="Vue Resources"></the-header>
+        <div class="container">
+            <the-resources></the-resources>
+        </div>
+    </span>
 </template>
 
 <script>

@@ -1,33 +1,35 @@
 <template>
-    <base-dialog v-if="inputIsInvalid" title="Invalid Input!" @close="closeDialog">
-        <template #default>
-            <p class="text-danger"><strong><em>Please dont leave any input field blank!</em></strong></p>
-            <p>Kindly check all the inputs and make sure its not empty.</p>
-        </template>
-        <template #actions>
-            <base-button class="btn link" @click="closeDialog">OK</base-button>
-        </template>
-    </base-dialog>
-    <base-card>
-        <h2>Add Resource</h2>
-        <form @submit.prevent="submitData">
-            <div class="form-margin">
-                <label for="title">Title</label>
-                <input id="title" name="title" type="text" ref="titleInput">
-            </div>
-            <div class="form-margin">
-                <label for="description">Description</label>
-                <textarea name="description" id="description" rows="3" ref="descInput"></textarea>
-            </div>
-            <div class="form-margin">
-                <label for="link">Link</label>
-                <input id="link" name="link" type="url" ref="linkInput">
-            </div>
-            <div>
-                <base-button class="btn btn-purple" type="submit">Add Resource</base-button>
-            </div>
-        </form>
-    </base-card>
+    <span>
+        <base-dialog v-if="inputIsInvalid" title="Invalid Input!" @close="closeDialog">
+            <template #default>
+                <p class="text-danger"><strong><em>Please dont leave any input field blank!</em></strong></p>
+                <p>Kindly check all the inputs and make sure its not empty.</p>
+            </template>
+            <template #actions>
+                <base-button class="btn link" @click="closeDialog">OK</base-button>
+            </template>
+        </base-dialog>
+        <base-card>
+            <h2>Add Resource</h2>
+            <form @submit.prevent="submitData">
+                <div class="form-margin">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" ref="titleInput">
+                </div>
+                <div class="form-margin">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="3" ref="descInput"></textarea>
+                </div>
+                <div class="form-margin">
+                    <label for="link">Link</label>
+                    <input id="link" name="link" type="url" ref="linkInput">
+                </div>
+                <div>
+                    <base-button class="btn btn-purple" type="submit">Add Resource</base-button>
+                </div>
+            </form>
+        </base-card>
+    </span>
 </template>
 
 <script>
