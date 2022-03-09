@@ -28,13 +28,15 @@ export default {
                     id: 'official-guide',
                     title: 'Official Guide',
                     description: 'Official Vue JS documentation.',
-                    link: 'https://vuejs.org'
+                    link: 'https://vuejs.org',
+                    icon: 'https://w7.pngwing.com/pngs/595/279/png-transparent-vue-js-javascript-library-angularjs-react-vue-js-template-angle-text-thumbnail.png',
                 },
                 {
                     id: 'google',
                     title: 'Google',
                     description: 'Learn to Google..',
-                    link: 'https://google.com'
+                    link: 'https://google.com',
+                    icon: 'https://google.com/favicon.ico',
                 },
             ],
         };
@@ -58,12 +60,13 @@ export default {
         setSelectedTab(tab){
             this.selectedTab = tab;
         },
-        addResource(title, description, link){
+        addResource(title, description, link, icon){
             const newResource = {
                 id: new Date().toISOString(),
                 title: title,
                 description: description,
                 link: link,
+                icon: icon,
             };
             this.storedResources.unshift(newResource);
             this.selectedTab = 'stored-resources';

@@ -6,6 +6,7 @@
         :title="resource.title"
         :description="resource.description"
         :link="resource.link"
+        :icon="resource.icon"
         >{{ resource }}</learning-resource>
     </ul>
 </template>

@@ -45,6 +45,7 @@ export default {
             const enteredTitle = this.$refs.titleInput.value;
             const enteredDesc = this.$refs.descInput.value;
             const enteredLink = this.$refs.linkInput.value;
+            const newIcon = this.$refs.linkInput.value + '/favicon.ico';
             
             if(enteredTitle.trim() === '' || 
                enteredDesc.trim() === '' || 
@@ -53,7 +54,7 @@ export default {
                 return;
             }
 
-            this.addResource(enteredTitle, enteredDesc, enteredLink);
+            this.addResource(enteredTitle, enteredDesc, enteredLink, newIcon);
         },
         closeDialog() {
             this.inputIsInvalid = false;

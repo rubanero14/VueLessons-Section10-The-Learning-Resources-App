@@ -6,8 +6,9 @@
                 <base-button class="btn btn-purple" @click="deleteResource">Delete</base-button>
             </header>
             <p>{{ description }}</p>
-            <nav>
+            <nav class="d-flex justify-content-between">
                 <a class="btn link" :href="link">Read More..</a>
+                <img :src="icon" :alt="title+' logo'">
             </nav>
         </base-card>
     </li>    
@@ -21,6 +22,7 @@ export default {
         'title',
         'description',
         'link',
+        'icon',
     ],
 }
 </script>
@@ -56,5 +58,13 @@ p {
 h3 {
     font-size: 1.25rem;
     margin: 0.5rem 0;
+}
+
+img {
+    width: 50px;
+    height: auto;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
 }
 </style>
