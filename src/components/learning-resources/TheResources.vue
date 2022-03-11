@@ -22,8 +22,8 @@ export default {
     data() {
         return {
             selectedTab: 'stored-resources',
-            storedResources: 
-            [
+            isDeleted: false,
+            results: [
                 {
                     id: 'official-guide',
                     title: 'Official Guide',
@@ -43,7 +43,7 @@ export default {
     },
     provide() {
         return {
-            resources: this.storedResources,
+            resources: this.results,
             addResource: this.addResource,
             deleteResource: this.deleteResource,
         };
@@ -54,26 +54,86 @@ export default {
         },
         addResButtonMode() {
             return this.selectedTab === 'add-resource'? 'btn-purple p-2' : 'flat';
-        }
+        },
+    },
+    mounted(){
+        this.storedResources();
     },
     methods: {
         setSelectedTab(tab){
             this.selectedTab = tab;
         },
+        
+        storedResources(){
+            if(this.isDeleted === true){
+                fetch('https://vue-http-demo-e06ca-default-rtdb.firebaseio.com/resource-link.json').then((response) => {
+                 if(response.ok) {
+                    return response.json();
+                }
+             }).then((data) => {
+                 console.log(data);  
+                const results = [];
+                for (const id in data) {
+                    results.push({
+                        id: id,
+                        title: data[id].title,
+                        description: data[id].description,
+                        link: data[id].link,
+                        icon: data[id].icon,
+                    });
+                }
+                this.results.push(...results);
+                console.log(this.results);  
+            })} else {
+                fetch('https://vue-http-demo-e06ca-default-rtdb.firebaseio.com/resource-link.json').then((response) => {
+                 if(response.ok) {
+                    return response.json();
+                }
+             }).then((data) => {
+                 console.log(data);  
+                const results = [];
+                for (const id in data) {
+                    results.push({
+                        id: id,
+                        title: data[id].title,
+                        description: data[id].description,
+                        link: data[id].link,
+                        icon: data[id].icon,
+                    });
+                }
+                this.results.push(...results);
+                console.log(this.results);  
+            });
+            }
+        },
         addResource(title, description, link, icon){
-            const newResource = {
-                id: new Date().toISOString(),
-                title: title,
-                description: description,
-                link: link,
-                icon: icon,
-            };
-            this.storedResources.unshift(newResource);
+            fetch('https://vue-http-demo-e06ca-default-rtdb.firebaseio.com/resource-link.json', {
+                method: 'POST',
+                header: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: title,
+                    description: description,
+                    link: link,
+                    icon: icon,
+                }),
+            });
             this.selectedTab = 'stored-resources';
+            window.location.reload();
         },
         deleteResource(resId){
-            const resIndex = this.storedResources.findIndex(res => res.id === resId);
-            this.storedResources.splice(resIndex, 1);
+            if(resId === 'official-guide' || resId === 'google'){
+                const resIndex = this.results.findIndex(resource => resource.id === resId);
+                this.results.splice(resIndex, 1);
+            } else {
+                this.isDeleted = true;
+                console.log(this.isDeleted);
+                fetch(`https://vue-http-demo-e06ca-default-rtdb.firebaseio.com/resource-link/${resId}.json`, {
+                    method: 'DELETE',
+                });
+                 setTimeout(function(){ location.reload(); }, 1000);
+            }
         },
     },
 }

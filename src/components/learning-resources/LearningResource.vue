@@ -1,9 +1,9 @@
 <template>
     <li>
-        <base-card>
+        <base-card :id="id">
             <header>
                 <h3>{{ title }}</h3>
-                <base-button class="btn btn-purple" @click="deleteResource">Delete</base-button>
+                <base-button class="btn btn-purple" @click="deleteResource(id)">Delete</base-button>
             </header>
             <p>{{ description }}</p>
             <nav class="d-flex justify-content-between">
@@ -19,6 +19,7 @@ export default {
     inject: ['deleteResource'],
   components: ['base-card'],
     props: [
+        'id',
         'title',
         'description',
         'link',
